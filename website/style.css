@@ -1,0 +1,111 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Oswald', sans-serif;
+    background-color: #e6f0ff;
+}
+
+h1 {
+    font-size: xx-large;
+}
+
+h2 {
+    font-size: x-large;
+}
+
+.headline {
+    width: 100%;
+    text-align: center;
+    background-color: black;
+    color: whitesmoke;
+    margin-bottom: 40px;
+}
+
+.zip,
+.feel {
+    margin-bottom: 40px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+label,
+input,
+textarea {
+    vertical-align: middle;
+}
+
+input,
+.myInput {
+    padding: 10px;
+    font-size: large;
+}
+
+.units {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.unit-title {
+    margin-right: 10px;
+}
+
+.radio-label {
+    font-size: large;
+}
+
+#metric,
+#imperial {
+    margin-left: -5px;
+}
+
+#metric {
+    margin-right: 10px;
+}
+
+button {
+    font-size: large;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 40px;
+    background-color: #002966;
+    color: whitesmoke;
+    box-shadow: 2px 2px 4px black;
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+.title {
+    margin-bottom: 20px;
+    font-size: x-large;
+    text-align: center;
+}
+
+#entryHolder {
+    font-size: large;
+    width: 400px;
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px black;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    background-color: black;
+    color: whitesmoke;
+    margin-top: 40px;
+}
+
