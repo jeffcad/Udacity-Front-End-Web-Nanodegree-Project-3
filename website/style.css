@@ -101,6 +101,12 @@ button {
     box-shadow: 3px 3px 5px black;
 }
 
+.icon {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 footer {
     width: 100%;
     text-align: center;
