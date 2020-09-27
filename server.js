@@ -45,6 +45,7 @@ function postData(request, response) {
     projectData = {
         date: request.body.date,
         temperature: request.body.temperature,
-        feeling: request.body.feeling
+        feelings: request.body.feelings
     };
+    response.send(projectData);
 }
