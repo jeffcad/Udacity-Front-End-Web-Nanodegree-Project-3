@@ -26,7 +26,7 @@ function clickRespond() {
     getWeather(url)
         .then(function (weatherData) {
             const icon = weatherData.weather[0].icon;
-            const date = dateTime(weatherData);
+            const date = dateTime();
             const temperature = weatherData.main.temp.toFixed(0);
             const feelings = feelingsInput.value;
             postJournal('/add', { icon, date, temperature, feelings });
@@ -79,11 +79,8 @@ async function updateUI() {
     }
 }
 
-function dateTime(weatherData) {
-    const millisecondTime = (weatherData.dt) * 1000;
-    const utc = new Date(millisecondTime);
-    const userTimezone = utc.getTimezoneOffset() * 60 * 1000;
-    const d = new Date(millisecondTime + (weatherData.timezone * 1000) + userTimezone);
+function dateTime() {
+    const d = new Date();
     let minutes = d.getMinutes();
     if (d.getMinutes() <= 9) {
         minutes = `0${minutes}`;
