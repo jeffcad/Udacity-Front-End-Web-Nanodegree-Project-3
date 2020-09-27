@@ -21,10 +21,10 @@ function clickRespond() {
             const date = (d.getMonth() + 1) + '.' + d.getDate() + '.' + d.getFullYear();
             const feelings = feelingsInput.value;
             const temperature = weatherData.main.temp.toFixed(0);
-            console.log('date');
             postJournal('/add', { date, temperature, feelings });
+            updateUI();
         })
-        .then(updateUI());
+    // .then(function () { updateUI(); });
 }
 
 async function getWeather(url) {
@@ -49,8 +49,6 @@ async function postJournal(url, data) {
     // TODO: handle errors
     try {
         const projectData = await response.json();
-        console.log('Post returned:');
-        console.log(projectData);
         return projectData;
     } catch (error) {
         console.log("error", error);
@@ -59,9 +57,9 @@ async function postJournal(url, data) {
 
 // TODO handle error case
 async function updateUI() {
-    const request = await fetch('/retrieve');
+    const response = await fetch('/retrieve');
     try {
-        const latestEntry = await request.json();
+        const latestEntry = await response.json();
         document.getElementById('date').innerHTML = latestEntry.date;
         document.getElementById('temp').innerHTML = latestEntry.temperature;
         document.getElementById('content').innerHTML = latestEntry.feelings;
