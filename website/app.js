@@ -1,9 +1,11 @@
 /* Global Variables */
-const API_ROOT = 'http://api.openweathermap.org/data/2.5/weather?zip=';
+const API_ROOT_ZIP = 'http://api.openweathermap.org/data/2.5/weather?zip=';
+const API_ROOT_CITY = 'http://api.openweathermap.org/data/2.5/weather?q=';
 const API_UNITS = '&units=';
 const API_KEY = `&appid=${config.API_KEY}`;
 
 const zipInput = document.getElementById('zip');
+const cityInput = document.getElementById('city');
 const feelingsInput = document.getElementById('feelings');
 const goButton = document.getElementById('generate');
 
@@ -12,9 +14,15 @@ goButton.addEventListener('click', clickRespond);
 
 
 function clickRespond() {
-    const zip = zipInput.value;
     const units = document.querySelector('input[name="units"]:checked').value;
-    const url = API_ROOT + zip + API_UNITS + units + API_KEY;
+    const zip = zipInput.value;
+    const city = cityInput.value;
+    let url;
+    if (zip) {
+        url = API_ROOT_ZIP + zip + API_UNITS + units + API_KEY;
+    } else if (city) {
+        url = API_ROOT_CITY + city + API_UNITS + units + API_KEY;
+    }
     getWeather(url)
         .then(function (weatherData) {
             const icon = weatherData.weather[0].icon;
@@ -72,8 +80,14 @@ async function updateUI() {
 }
 
 function dateTime(weatherData) {
-    const millisecondTime = (weatherData.dt + weatherData.timezone) * 1000;
-    const d = new Date(millisecondTime);
-    const date = `${d.getMonth() + 1}.${d.getDate()}.${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
+    const millisecondTime = (weatherData.dt) * 1000;
+    const utc = new Date(millisecondTime);
+    const userTimezone = utc.getTimezoneOffset() * 60 * 1000;
+    const d = new Date(millisecondTime + (weatherData.timezone * 1000) + userTimezone);
+    let minutes = d.getMinutes();
+    if (d.getMinutes() <= 9) {
+        minutes = `0${minutes}`;
+    }
+    const date = `${d.getMonth() + 1}.${d.getDate()}.${d.getFullYear()} ${d.getHours()}:${minutes}`;
     return date;
 }
