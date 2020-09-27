@@ -1,9 +1,9 @@
-body{
+body {
     background: #fffff8;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-#app{
+#app {
     display: grid;
     grid-auto-rows: minmax(150px, auto);
     /* grid-template-columns:  */
@@ -16,44 +16,45 @@ body{
     font-family: 'Oswald', sans-serif;
 }
 
-.holder{
+.holder {
 
 }
 
-.entry{
+.entry {
     background: rgba(59, 74, 107, .4);
 }
 
-#entryHolder{
+#entryHolder {
+    border: 2px solid black;
+    height: 50px;
+}
+
+#date {
 
 }
 
-#date{
+#temp {
 
 }
 
-#temp{
-
-}
-
-#content{
+#content {
 
 }
 
 .headline {
 
 }
-.title{
+.title {
 
 }
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
-label{
+label {
     display:block;
     font-size: 27px;
 }
 
-input{
+input {
     display:block;
     height: 60px;
     width: 320px;
@@ -64,7 +65,7 @@ input{
     border: none;
 }
 
-button{
+button {
     width: 400px;
     height: 100px;
     background: #3b4a6b;
@@ -75,11 +76,11 @@ button{
     box-shadow: 2px 4px 5px #444;
     cursor: pointer;
 }
-h1{
+h1 {
     font-size: 36px;
 }
 
-textarea{
+textarea {
     background:#22b2da;
     color: #f0d43a;
     font-size: 20px;

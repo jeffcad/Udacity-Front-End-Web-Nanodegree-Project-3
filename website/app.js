@@ -1,12 +1,4 @@
 /* Global Variables */
-
-// Create a new date instance dynamically with JS
-// TODO: change this to use new DATE((time returned by weather + timezone) 
-// * 1000) to get a time in the location returned
-// need to wait until after data fetch to do this
-let d = new Date();
-let date = (d.getMonth() + 1) + '.' + d.getDate() + '.' + d.getFullYear();
-
 const API_ROOT = 'http://api.openweathermap.org/data/2.5/weather?zip=';
 const TEMPERATURE_UNITS = '&units=metric';
 const API_KEY = `&appid=${config.API_KEY}`;
@@ -24,18 +16,21 @@ function clickRespond() {
     const url = API_ROOT + zip + TEMPERATURE_UNITS + API_KEY;
     getWeather(url)
         .then(function (weatherData) {
+            const millisecondTime = (weatherData.dt + weatherData.timezone) * 1000;
+            const d = new Date(millisecondTime);
+            const date = (d.getMonth() + 1) + '.' + d.getDate() + '.' + d.getFullYear();
             const feelings = feelingsInput.value;
             const temperature = weatherData.main.temp.toFixed(0);
-            console.log(date + temperature + feelings);
+            console.log('date');
             postJournal('/add', { date, temperature, feelings });
-        });
+        })
+        .then(updateUI());
 }
 
 async function getWeather(url) {
     const response = await fetch(url);
     try {
         const weatherData = await response.json();
-        console.log(weatherData);
         return weatherData;
     } catch (error) {
         console.log('something went wrong');
@@ -44,7 +39,6 @@ async function getWeather(url) {
 }
 
 async function postJournal(url, data) {
-    console.log(data);
     const response = await fetch(url, {
         method: 'POST',
         credentials: 'same-origin',
@@ -58,6 +52,19 @@ async function postJournal(url, data) {
         console.log('Post returned:');
         console.log(projectData);
         return projectData;
+    } catch (error) {
+        console.log("error", error);
+    }
+}
+
+// TODO handle error case
+async function updateUI() {
+    const request = await fetch('/retrieve');
+    try {
+        const latestEntry = await request.json();
+        document.getElementById('date').innerHTML = latestEntry.date;
+        document.getElementById('temp').innerHTML = latestEntry.temperature;
+        document.getElementById('content').innerHTML = latestEntry.feelings;
     } catch (error) {
         console.log("error", error);
     }
