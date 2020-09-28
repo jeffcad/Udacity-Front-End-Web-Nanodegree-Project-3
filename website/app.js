@@ -24,8 +24,14 @@ function clickRespond() {
     // Grab user's input
     const zipInput = document.getElementById('zip');
     const cityInput = document.getElementById('city');
+    const unitsInput = document.querySelector('input[name="units"]:checked')
     const feelingsInput = document.getElementById('feelings');
-    const units = document.querySelector('input[name="units"]:checked').value;
+    let units;
+    if (unitsInput) {
+        units = unitsInput.value;
+    } else {
+        units = "metric";
+    }
 
     // Read values of zip and city
     const zip = zipInput.value;

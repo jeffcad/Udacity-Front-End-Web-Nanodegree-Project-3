@@ -48,5 +48,5 @@ function postData(request, response) {
         temperature: request.body.temperature,
         feelings: request.body.feelings
     };
-    response.send('POST received');
+    response.send({ message: "Post received" })
 }
