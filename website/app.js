@@ -26,6 +26,8 @@ function clickRespond() {
     const cityInput = document.getElementById('city');
     const feelingsInput = document.getElementById('feelings');
     const units = document.querySelector('input[name="units"]:checked').value;
+
+    // Read values of zip and city
     const zip = zipInput.value;
     const city = cityInput.value;
 
@@ -43,14 +45,23 @@ function clickRespond() {
 
         // Prepares data for POST, calls the POST
         .then(function (weatherData) {
-            const icon = weatherData.weather[0].icon;
-            const date = dateTime();
-            const temperature = weatherData.main.temp.toFixed(0);
-            const feelings = feelingsInput.value;
-            postJournal('/add', { icon, date, temperature, feelings });
+            const errorMessage = document.getElementById('error');
+            if (weatherData.cod == "200") {
+                errorMessage.classList.add('hide');
+                const icon = weatherData.weather[0].icon;
+                const date = dateTime();
+                const temperature = weatherData.main.temp.toFixed(0);
+                const feelings = feelingsInput.value;
+                postJournal('/add', { icon, date, temperature, feelings });
 
-            // Calls to update the site with latest entry
-            updateUI();
+                // Calls to update the site with latest entry
+                updateUI();
+
+            } else {
+                console.log('Bad data entered');
+                errorMessage.classList.remove('hide');
+                return;
+            }
         })
 }
 
@@ -84,9 +95,7 @@ async function updateUI() {
     document.getElementById('date').innerHTML = `Date: ${latestEntry.date}`;
     document.getElementById('temp').innerHTML = `Temperature: ${latestEntry.temperature} degrees`;
     document.getElementById('content').innerHTML = `Feelings: ${latestEntry.feelings}`;
-    if (document.querySelector('.hide')) {
-        document.querySelector('.hide').classList.remove('hide');
-    }
+    document.getElementById('journal').classList.remove('hide');
 }
 
 // Calculate the user's date and time

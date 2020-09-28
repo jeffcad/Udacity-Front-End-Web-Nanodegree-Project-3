@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -13,6 +13,7 @@
     <div class="holder headline">
       <h1>Weather Journal App</h1>
     </div>
+    <h2 id="error" class="hide">Bad data entered. Please try again.</h2>
     <div class="holder zip city">
       <label for="zip">Enter zipcode here</label>
       <input type="text" id="zip" maxlength="5" size="13" placeholder="enter zip code here">
@@ -31,7 +32,7 @@
       <textarea class="myInput" id="feelings" placeholder="Enter your feelings here" rows="9" cols="50"></textarea>
     </div>
     <button id="generate" type="submit">Generate</button>
-    <div class="holder entry hide">
+    <div id="journal" class="holder entry hide">
       <div class="title">Most Recent Entry</div>
       <div id="entryHolder">
         <div id="icon"></div>
