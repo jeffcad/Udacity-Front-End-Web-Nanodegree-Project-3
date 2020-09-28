@@ -106,6 +106,6 @@ function dateTime() {
     if (d.getMinutes() <= 9) {
         minutes = `0${minutes}`;
     }
-    const date = `${d.getMonth() + 1}.${d.getDate()}.${d.getFullYear()} ${d.getHours()}:${minutes}`;
+    const date = `${d.getMonth() + 1}.${d.getDate()}.${d.getFullYear()} at time ${d.getHours()}:${minutes}`;
     return date;
 }
