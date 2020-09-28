@@ -16,7 +16,6 @@ const API_KEY = `&appid=${config.API_KEY}`;
 const goButton = document.getElementById('generate');
 goButton.addEventListener('click', clickRespond);
 
-
 // Main function of the program
 // Grabs the user's input, then forms URL, calls API, POSTS and updates UI
 function clickRespond() {
@@ -27,10 +26,16 @@ function clickRespond() {
     const unitsInput = document.querySelector('input[name="units"]:checked')
     const feelingsInput = document.getElementById('feelings');
     let units;
+    let degreeSystem;
     if (unitsInput) {
         units = unitsInput.value;
     } else {
         units = "metric";
+    }
+    if (units == "metric") {
+        degreeSystem = "C";
+    } else {
+        degreeSystem = "F";
     }
 
     // Read values of zip and city
@@ -61,7 +66,7 @@ function clickRespond() {
                 postJournal('/add', { icon, date, temperature, feelings });
 
                 // Calls to update the site with latest entry
-                updateUI();
+                updateUI(degreeSystem);
 
             } else {
                 console.log('Bad data entered');
@@ -94,12 +99,12 @@ async function postJournal(url, data) {
 // Updates the website's latest entry card
 // Includes weather icon, date, temperature, feelings
 // Shows the card if it's hidden
-async function updateUI() {
+async function updateUI(degreeSystem) {
     const response = await fetch('/retrieve');
     const latestEntry = await response.json();
     document.getElementById('icon').innerHTML = `<img class="icon" src="http://openweathermap.org/img/wn/${latestEntry.icon}@2x.png" alt="Weather icon">`
     document.getElementById('date').innerHTML = `Date: ${latestEntry.date}`;
-    document.getElementById('temp').innerHTML = `Temperature: ${latestEntry.temperature} degrees`;
+    document.getElementById('temp').innerHTML = `Temperature: ${latestEntry.temperature}\xB0${degreeSystem}`;
     document.getElementById('content').innerHTML = `Feelings: ${latestEntry.feelings}`;
     document.getElementById('journal').classList.remove('hide');
 }
