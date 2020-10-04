@@ -11,12 +11,10 @@ You also must have an API key for [OpenWeatherMap.org](https://openweathermap.or
 After you get your API key, go to the file *config-sample.js* in the *website* folder. Here you should replace the dummy API key with your own. Then rename the file to *config.js*.
 
 ## Installation
-If Node is installed, then you can use the Node Package Manager to install the packages needed to run this program. In the terminal, use these 3 commands one at a time.
+If Node is installed, then you can use the Node Package Manager to install the packages needed to run this program, which are listed in the package.json file. In the terminal, use this command:
 
 ```
-npm install express
-npm install cors
-npm install body-parser
+npm install
 ```
 When those packages have installed, start the server with the following command.
 
