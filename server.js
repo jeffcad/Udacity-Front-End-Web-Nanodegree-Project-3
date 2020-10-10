@@ -42,11 +42,7 @@ function getData(request, response) {
 app.post('/add', postData);
 
 function postData(request, response) {
-    projectData = {
-        icon: request.body.icon,
-        date: request.body.date,
-        temperature: request.body.temperature,
-        feelings: request.body.feelings
-    };
+    projectData = request.body;
     response.send({ message: "Post received" })
+    console.log(projectData)
 }
